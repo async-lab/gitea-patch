@@ -26,17 +26,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Make Workdir
+      - name: Patch Gitea
         run: |
-          mkdir -p ./work
-          cd ./work
           git clone https://github.com/go-gitea/gitea.git
+          cd gitea
           git apply ../oauth.go.patch
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./work
+          context: ./gitea
           file: Dockerfile
           push: true
           tags: |
