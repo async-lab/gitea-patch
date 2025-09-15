@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./gitea
-          file: Dockerfile
+          file: ./gitea/Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}/gitea:${{ github.sha }}
